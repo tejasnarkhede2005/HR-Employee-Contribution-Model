@@ -286,5 +286,6 @@ elif page == "ℹ️ About":
 # --- FOOTER ---
 current_year = datetime.datetime.now().year
 st.markdown(f"---")
-st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built with Streamlit</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built By Tejas</div>", unsafe_allow_html=True)
+
 
