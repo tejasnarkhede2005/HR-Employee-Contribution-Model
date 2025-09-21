@@ -31,7 +31,7 @@ graph TD
         K
     end
 
-```
-
     J --> C;
     L --> C;
+
+```
