@@ -3,6 +3,7 @@ import datetime
 import pickle
 import pandas as pd
 import numpy as np
+import joblib  # <-- ADDED THIS IMPORT
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -126,8 +127,9 @@ st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 @st.cache_resource
 def load_model():
     try:
+        # --- CHANGED FROM pickle.load to joblib.load ---
         with open('AdaBoost_best_model.pkl', 'rb') as file:
-            model = pickle.load(file)
+            model = joblib.load(file)
         return model
     except FileNotFoundError:
         st.error("Model file 'AdaBoost_best_model.pkl' not found. Please ensure it's in the root directory.")
@@ -259,7 +261,7 @@ def about_page():
         The primary goal is to provide an intuitive and visually appealing tool for managers and HR professionals to predict employee attrition. By inputting key employee metrics, the application uses a pre-trained AdaBoost machine learning model to generate a churn likelihood score.
 
         ### Technology Stack
-        - **Backend & Model:** Python, Scikit-learn (AdaBoost Classifier)
+        - **Backend & Model:** Python, scikit-learn (AdaBoost Classifier)
         - **Frontend:** Streamlit with custom CSS for styling.
         - **Data Handling:** Pandas, NumPy.
 
