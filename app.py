@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px 0;
 }
 """
-st.markdown(f"<style>{css}</style>", unsafe_html=True)
+st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 
 # --- MAIN PAGE CONTENT ---
@@ -154,6 +154,6 @@ st.markdown(
 current_year = datetime.datetime.now().year
 # Note: The time zone is set to IST (India Standard Time).
 st.markdown(f"---")
-st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built with Streamlit</div>", unsafe_html=True)
-st.markdown(f"<div class='footer'>Current Time (IST): {datetime.datetime.now().strftime('%d %B %Y, %I:%M %p')}</div>", unsafe_html=True)
+st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built with Streamlit</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='footer'>Current Time (IST): {datetime.datetime.now().strftime('%d %B %Y, %I:%M %p')}</div>", unsafe_allow_html=True)
 
