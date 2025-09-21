@@ -4,34 +4,31 @@ live link:
 
 ```mermaid
 graph TD
-    A[Start: User runs 'streamlit run app.py'] --> B{Display Home Page};
-    B --> C{User interacts with Sidebar Navi};
-    
-    C --> D[Selects 'Predict Churn' Page];
-    D --> E[User fills in employee data form];
-    E --> F{Clicks 'Predict Churn' Button};
-    F --> G[Load AdaBoost_best_model.pkl];
-    G --> H[Preprocess input data];
-    H --> I[Model makes prediction];
-    I --> J[Display Result: Churn / Stay with Confidence Score];
-    
-    C --> K[Selects 'About' Page];
-    K --> L[Display project information];
+    A[Start] --> B{Run `streamlit run app.py`};
+    B --> C[Application Initializes];
+    C --> D[Load AdaBoost Model via Joblib];
+    C --> E[Display UI with Sidebar Navigation];
 
-    subgraph "Prediction Logic"
-        G
-        H
-        I
-        J
+    subgraph "User Interaction"
+        E --> F{User Selects Page};
+        F -- "Home" --> G[Display Welcome Page];
+        F -- "About" --> H[Display Project Information];
+        F -- "🔮 Predict Churn" --> I[Display Prediction Form];
     end
 
-    subgraph "Pages"
-        B
-        D
-        K
+    subgraph "Prediction Process"
+        I --> J[User Fills Employee Details];
+        J --> K[User Clicks "Predict Churn"];
+        K --> L[Preprocess Data into DataFrame];
+        L --> M[Model Makes Prediction];
+        M --> N{Display Result};
+        N -- "Churn" --> O[Show Error Box with Confidence %];
+        N -- "Stay" --> P[Show Success Box with Confidence %];
     end
 
-    J --> C;
-    L --> C;
+    G --> F;
+    H --> F;
+    P --> F;
+    O --> F;
 
 ```
