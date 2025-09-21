@@ -4,31 +4,42 @@ live link:
 
 ```mermaid
 graph TD
-    A[Start] --> B{Run `streamlit run app.py`};
-    B --> C[Application Initializes];
-    C --> D[Load AdaBoost Model via Joblib];
-    C --> E[Display UI with Sidebar Navigation];
+    %% Define styles for different node types
+    classDef startEnd fill:#1D976C,color:#fff,stroke:#333,stroke-width:2px;
+    classDef process fill:#302b63,color:#fff,stroke:#93F9B9,stroke-width:2px;
+    classDef decision fill:#8a2be2,color:#fff,stroke:#333,stroke-width:2px;
 
-    subgraph "User Interaction"
-        E --> F{User Selects Page};
-        F -- "Home" --> G[Display Welcome Page];
-        F -- "About" --> H[Display Project Information];
-        F -- "🔮 Predict Churn" --> I[Display Prediction Form];
+    A[Start] --> B{Run Streamlit App};
+    B --> C[Initialize Application];
+    C --> D[Load ML Model];
+    C --> E[Display UI & Sidebar];
+
+    subgraph User Interaction
+        E --> F{Select Page};
+        F -- Home --> G[View Welcome Page];
+        F -- About --> H[View Project Info];
+        F -- Predict Churn --> I[View Prediction Form];
     end
 
-    subgraph "Prediction Process"
-        I --> J[User Fills Employee Details];
-        J --> K[User Clicks "Predict Churn"];
-        K --> L[Preprocess Data into DataFrame];
-        L --> M[Model Makes Prediction];
-        M --> N{Display Result};
-        N -- "Churn" --> O[Show Error Box with Confidence %];
-        N -- "Stay" --> P[Show Success Box with Confidence %];
+    subgraph Prediction Process
+        I --> J[User Enters Employee Data];
+        J --> K[Clicks 'Predict Churn' Button];
+        K --> L[Prepare Data for Model];
+        L --> M[Model Generates Prediction];
+        M --> N{Display Prediction Result};
+        N -- Churn --> O[Show 'Churn' Alert];
+        N -- Stay --> P[Show 'Stay' Alert];
     end
 
+    %% Apply styles
+    class A,K,O,P startEnd;
+    class C,D,E,G,H,I,J,L,M process;
+    class B,F,N decision;
+
+    %% Link back to page selection
     G --> F;
     H --> F;
-    P --> F;
     O --> F;
+    P --> F;
 
 ```
