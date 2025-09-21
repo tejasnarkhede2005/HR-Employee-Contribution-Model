@@ -5,32 +5,36 @@ import datetime
 # --- PAGE CONFIG ---
 st.set_page_config(
     page_title="Employee Churn Predictor",
-    page_icon="✨",
-    layout="wide", # Using a wider layout for a more modern feel
+    page_icon="🌙",
+    layout="wide", 
     initial_sidebar_state="expanded",
 )
 
 # --- INJECT CUSTOM CSS ---
-# New, refreshed CSS for a light, modern theme
+# New, refreshed CSS for a sleek, modern dark theme
 css = """
 /* --- General App Styling --- */
 body {
-    color: #333; /* Darker text for readability */
+    color: #E0E0E0; /* Light text for readability on dark background */
 }
 
 /* --- Main Content Area --- */
 .stApp {
-    background-color: #F0F2F6; /* Light grey background */
+    background-color: #121212; /* A common, comfortable dark background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF; /* Brighter white for headers */
 }
 
 /* --- Sidebar Styling --- */
 [data-testid="stSidebar"] {
-    background-color: #FFFFFF; /* White sidebar */
-    border-right: 1px solid #e6e6e6;
+    background-color: #1E1E1E; /* Slightly lighter dark for the sidebar */
+    border-right: 1px solid #2E2E2E;
 }
 
 [data-testid="stSidebar"] .st-emotion-cache-17lntkn {
-    color: #333333;
+    color: #E0E0E0;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     margin: 0.1rem 0;
@@ -41,74 +45,79 @@ body {
 
 /* Sidebar Navigation Links - Hover effect */
 [data-testid="stSidebar"] .st-emotion-cache-17lntkn:hover {
-    background-color: #F0F2F6;
-    color: #0068C9;
+    background-color: #333333;
+    color: #FFFFFF;
 }
 
 /* Sidebar Navigation Links - Active page */
 [data-testid="stSidebar"] .st-emotion-cache-1aehpv3 {
-    background-color: #E3F2FD; /* Light blue for active page */
-    color: #0068C9; /* Dark blue text for active page */
+    background-color: #007ACC; /* Vibrant blue for active page */
+    color: #FFFFFF; 
     font-weight: 600;
 }
 
 /* Sidebar Success Box */
 [data-testid="stSidebar"] [data-testid="stAlert"] {
-    background-color: #E3F2FD;
-    color: #0068C9;
+    background-color: rgba(0, 122, 204, 0.2);
+    color: #00A2FF;
     border-radius: 0.5rem;
+    border: 1px solid #007ACC;
 }
 
 /* --- Button Styling --- */
 .stButton>button {
-    background-color: #0068C9;
+    background-color: #007ACC;
     color: #FFFFFF;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    box-shadow: 0 0 15px rgba(0, 122, 204, 0.5);
 }
 
 .stButton>button:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
+    background-color: #008DD1;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 122, 204, 0.7);
 }
 
 .stButton>button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 8px 0 rgba(0, 118, 255, 0.39);
+    transform: translateY(0px);
+    box-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
 }
 
 /* --- SUCCESS/ERROR BOXES in Main Area --- */
 [data-testid="stAlert"] {
     border-radius: 0.5rem;
     border-left: 5px solid;
+    background-color: #1E1E1E; /* Match sidebar bg */
 }
 
 [data-testid="stSuccess"] {
     border-color: #28a745;
+    color: #28a745;
 }
 
 [data-testid="stError"] {
     border-color: #dc3545;
+    color: #dc3545;
 }
 
 /* --- Footer Styling --- */
 .footer {
     text-align: center;
-    color: #888;
+    color: #6c6c6c; /* Lighter grey for footer text */
     font-size: 0.9em;
     padding: 20px 0;
 }
 """
-st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+st.markdown(f"<style>{css}</style>", unsafe_html=True)
 
 
 # --- MAIN PAGE CONTENT ---
-st.title("✨ Welcome to the Employee Churn Predictor")
+st.title("🌙 Welcome to the Employee Churn Predictor")
 st.sidebar.success("Select a page from the navigation menu.")
 
 st.markdown(
@@ -132,8 +141,8 @@ st.markdown(
 
 # --- FOOTER ---
 current_year = datetime.datetime.now().year
-# Note: The time zone is set to IST (India Standard Time) as requested in a previous interaction.
+# Note: The time zone is set to IST (India Standard Time).
 st.markdown(f"---")
-st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built with Streamlit</div>", unsafe_allow_html=True)
-st.markdown(f"<div class='footer'>Current Time (IST): {datetime.datetime.now().strftime('%d %B %Y, %I:%M %p')}</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='footer'>© {current_year} Employee Churn Predictor | Built with Streamlit</div>", unsafe_html=True)
+st.markdown(f"<div class='footer'>Current Time (IST): {datetime.datetime.now().strftime('%d %B %Y, %I:%M %p')}</div>", unsafe_html=True)
 
