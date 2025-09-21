@@ -5,110 +5,121 @@ import datetime
 # --- PAGE CONFIG ---
 st.set_page_config(
     page_title="Employee Churn Predictor",
-    page_icon="🌙",
-    layout="wide", 
+    page_icon="💎",
+    layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # --- INJECT CUSTOM CSS ---
-# New, refreshed CSS for a sleek, modern dark theme
+# A modern "Glassmorphism" theme with a background gradient
 css = """
-/* --- General App Styling --- */
-body {
-    color: #E0E0E0; /* Light text for readability on dark background */
-}
-
-/* --- Main Content Area --- */
+/* --- General App Styling & Gradient Background --- */
 .stApp {
-    background-color: #121212; /* A common, comfortable dark background */
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #E0E0E0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #FFFFFF; /* Brighter white for headers */
+    color: #FFFFFF;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3); /* Add shadow to text for depth */
+}
+
+/* --- Glassmorphism Effect for Containers --- */
+[data-testid="stSidebar"], .main .block-container {
+    background: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Specific adjustments for main content area to have glass effect */
+.main .block-container {
+    padding: 2rem 3rem;
+    margin-top: 2rem;
 }
 
 /* --- Sidebar Styling --- */
 [data-testid="stSidebar"] {
-    background-color: #1E1E1E; /* Slightly lighter dark for the sidebar */
-    border-right: 1px solid #2E2E2E;
+    padding-top: 2rem;
 }
 
 [data-testid="stSidebar"] .st-emotion-cache-17lntkn {
     color: #E0E0E0;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
+    border-radius: 10px;
     margin: 0.1rem 0;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.3s, color 0.3s;
     font-size: 1.0em;
     font-weight: 500;
+    background-color: transparent;
 }
 
 /* Sidebar Navigation Links - Hover effect */
 [data-testid="stSidebar"] .st-emotion-cache-17lntkn:hover {
-    background-color: #333333;
+    background-color: rgba(255, 255, 255, 0.1);
     color: #FFFFFF;
 }
 
 /* Sidebar Navigation Links - Active page */
 [data-testid="stSidebar"] .st-emotion-cache-1aehpv3 {
-    background-color: #007ACC; /* Vibrant blue for active page */
-    color: #FFFFFF; 
-    font-weight: 600;
+    background: linear-gradient(90deg, #1D976C, #93F9B9);
+    color: #0f0c29;
+    font-weight: 700;
 }
 
 /* Sidebar Success Box */
 [data-testid="stSidebar"] [data-testid="stAlert"] {
-    background-color: rgba(0, 122, 204, 0.2);
-    color: #00A2FF;
-    border-radius: 0.5rem;
-    border: 1px solid #007ACC;
+    background-color: rgba(29, 151, 108, 0.2);
+    color: #93F9B9;
+    border-radius: 10px;
+    border: 1px solid #1D976C;
 }
 
 /* --- Button Styling --- */
 .stButton>button {
-    background-color: #007ACC;
     color: #FFFFFF;
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-    box-shadow: 0 0 15px rgba(0, 122, 204, 0.5);
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, #1D976C, #93F9B9);
+    box-shadow: 0 4px 15px 0 rgba(29, 151, 108, 0.4);
 }
 
 .stButton>button:hover {
-    background-color: #008DD1;
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(0, 122, 204, 0.7);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px 0 rgba(29, 151, 108, 0.6);
 }
 
 .stButton>button:active {
     transform: translateY(0px);
-    box-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
 }
 
 /* --- SUCCESS/ERROR BOXES in Main Area --- */
 [data-testid="stAlert"] {
-    border-radius: 0.5rem;
+    border-radius: 10px;
     border-left: 5px solid;
-    background-color: #1E1E1E; /* Match sidebar bg */
+    background-color: rgba(0,0,0,0.2);
 }
 
 [data-testid="stSuccess"] {
     border-color: #28a745;
-    color: #28a745;
+    color: #93F9B9;
 }
 
 [data-testid="stError"] {
-    border-color: #dc3545;
-    color: #dc3545;
+    border-color: #e43a4b;
+    color: #ff8a96;
 }
 
 /* --- Footer Styling --- */
 .footer {
     text-align: center;
-    color: #6c6c6c; /* Lighter grey for footer text */
+    color: #a0a0a0;
     font-size: 0.9em;
     padding: 20px 0;
 }
@@ -117,7 +128,7 @@ st.markdown(f"<style>{css}</style>", unsafe_html=True)
 
 
 # --- MAIN PAGE CONTENT ---
-st.title("🌙 Welcome to the Employee Churn Predictor")
+st.title("💎 Welcome to the Employee Churn Predictor")
 st.sidebar.success("Select a page from the navigation menu.")
 
 st.markdown(
